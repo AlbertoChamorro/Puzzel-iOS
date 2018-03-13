@@ -29,13 +29,17 @@ public class Helpers {
     public static func buildBoxPuzzle(view: UIView){
     
         var titleCenterX: CGFloat = getWidthBoxElement(view: view) / 2
-        let titleCenterY: CGFloat = getHeightBoxElement(view: view) / 2
+        var titleCenterY: CGFloat = getHeightBoxElement(view: view) / 2
         
-        for _ in 0..<columsNum {
-            let label = Helpers.buildLabel(view: view)
-            label.center = CGPoint(x: titleCenterX, y: titleCenterY)
-            view.addSubview(label)
-            titleCenterX += getWidthBoxElement(view: view)
+        for _ in 0..<rowsNum {
+            for _ in 0..<columsNum {
+                let label = Helpers.buildLabel(view: view)
+                label.center = CGPoint(x: titleCenterX, y: titleCenterY)
+                view.addSubview(label)
+                titleCenterX += getWidthBoxElement(view: view)
+            }
+            titleCenterX = getWidthBoxElement(view: view) / 2
+            titleCenterY += getHeightBoxElement(view: view)
         }
     }
     
