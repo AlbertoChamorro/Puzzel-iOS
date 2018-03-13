@@ -14,7 +14,9 @@ class MainController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.puzzleContainerView.addSubview(Helpers.buildLabel(view: self.puzzleContainerView))
+        
+        Helpers.buildBoxPuzzle(view: self.puzzleContainerView)
+        
     }
 }
 
