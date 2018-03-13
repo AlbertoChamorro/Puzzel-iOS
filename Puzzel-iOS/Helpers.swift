@@ -15,13 +15,12 @@ public class Helpers {
     static let rowsNum: Int   = 4
     static let margin: CGFloat = 2.0
     
-    public static func buildLabel(view: UIView, positionX: CGFloat,
-                                  margin: CGFloat, backgroundColor: UIColor = UIColor.cyan) -> UILabel {
+    public static func buildLabel(view: UIView, backgroundColor: UIColor = UIColor.cyan) -> UILabel {
     
-        let height = view.frame.height/CGFloat(columsNum)
-        let width = view.frame.width/CGFloat(rowsNum)
+        let height = getHeightBoxElement(view: view)
+        let width = getWidthBoxElement(view: view)
         
-        let label = UILabel(frame: CGRect(x: positionX + margin, y: 0, width: width - margin, height: height))
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width - margin, height: height - margin))
         label.backgroundColor = backgroundColor
         
         return label
@@ -29,14 +28,24 @@ public class Helpers {
     
     public static func buildBoxPuzzle(view: UIView){
     
-        var positionX: CGFloat = 0
+        var titleCenterX: CGFloat = getWidthBoxElement(view: view) / 2
+        let titleCenterY: CGFloat = getHeightBoxElement(view: view) / 2
         
-        for i in 0..<columsNum {
-            let margin: CGFloat = i == 0 ? 0.0 : Helpers.margin
-            let label = Helpers.buildLabel(view: view, positionX: positionX, margin: margin)
+        for _ in 0..<columsNum {
+            let label = Helpers.buildLabel(view: view)
+            label.center = CGPoint(x: titleCenterX, y: titleCenterY)
             view.addSubview(label)
-            positionX = label.frame.origin.x + label.frame.width
+            titleCenterX += getWidthBoxElement(view: view)
         }
     }
+    
+    public static func getHeightBoxElement(view: UIView) -> CGFloat{
+        
+        return view.frame.height/CGFloat(rowsNum)
+    }
 
+    public static func getWidthBoxElement(view: UIView) -> CGFloat{
+        
+        return view.frame.width/CGFloat(columsNum)
+    }
 }
